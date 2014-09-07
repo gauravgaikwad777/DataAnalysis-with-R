@@ -3,4 +3,4 @@ IT497
 
 Assignments for Research Methodology
 
-Please access assignmnet 1 .doc
+Please access "Assignmnet 1 ggaikwa.html"
