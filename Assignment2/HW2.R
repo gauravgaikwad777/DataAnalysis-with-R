@@ -3,6 +3,8 @@ library(ggplot2)
 
 git_df <- read.csv("Git_data.csv")
 
+git_df
+
 str(git_df)
 
 #Plot Bar Graph for Number of Repositories 

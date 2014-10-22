@@ -60,19 +60,37 @@ Finally we were just interested to study Java and Python which are in top five o
 \subsection{Data Cleaning}
 The BigQuery provides you capability of querying against data source with searching and sorting capabilities which provides you with functionality to get cleaned data that you want to analyze finally.
 
-\section{Processing Cleaned Data}
+\section{Importing}
 This step will prepare the cleaned data for creating a final analysis demographics where RStudio with LaTeX is used to create a reproducible report.  Thus the final cleaned data from BigQuery can be downloaded in CSV file format and then provided to a data frame into R.
 
-Str function shows the structure of data frame as a R object. 
+This import is done through read csv function and thus imported to a data frame
 
-<<reg>>=
+
+<<reg, label=Data Import>>=
 library(ggplot2)
 
 git_df <- read.csv("Git_data.csv")
+@
+
+\section{Data}
+This is the data from GitHub directly. As the Data cleaning is already done through query itself the data will be our final feed for data analysis.
+
+String function str shows the structure of data frame as a R object.   
+
+
+<<reg>>=
 str(git_df)
 @
 
-\section{Plotting Graph}
+git\_df shows the data that is imported to the data frame.
+
+<<reg>>=
+git_df
+@
+
+There are three columns Repository Language which is the language of repository, No of repo is the total number of repositories for a given language  and Total repo file size which is sum of all the repositories for a given language respectively. 
+
+\section{Result}
 
 Graph is developed by ggplot2 which is a package library for R which is explained as:
 
@@ -90,6 +108,8 @@ The ggplot function firstly gets the data from the data frame, followed by the a
 Second parameter describes the graph type which here as geom\_bar for bar graph. scale fill manual is for manually filling the bars with your choice of color, ylab defines y axis label and ggtitle sets the title of the plot. 
 
 The first graph reflects the total number of repositories for a programming language.
+
+\begin{figure}
 <<label=fig1,fig=TRUE,echo=T>>=
 #Plot Bar Graph for Number of Repositories 
 ggplot(git_df, aes(x=Repository_Language, y=No_of_repo, 
@@ -98,9 +118,11 @@ ggplot(git_df, aes(x=Repository_Language, y=No_of_repo,
   scale_fill_manual(values=c("red", "black", "black", "blue", "black")) + 
   ylab("Number of Repositories") + ggtitle("Number of Repositories")
 @
+\caption{Top 5 Languages for highest Number of Repositories}
+\end{figure}
 
-
-The following Graph determines the total size of repositories for a particular language.
+\begin{figure}
+The second graph determines the total size of repositories for a particular language.
 <<label=fig2,fig=TRUE,echo=TRUE>>=
 #Plot Bar Graph for Total_file_size
 ggplot(git_df, aes(x=Repository_Language, 
@@ -109,7 +131,10 @@ ggplot(git_df, aes(x=Repository_Language,
   scale_fill_manual(values=c("red", "black", "black", "blue", "black")) + 
   ylab("File Size") + ggtitle("Repositories total File Size")
 @
+\caption{Top 5 Repositories total size by language}
+\end{figure}
 
+\break
 \section{Data Analysis}
 First graph shows that GitHub host largest of JavaScript repositories in number followed by Ruby, Java, PHP and then Python. Thus Java wins over Python in the scenario when compared in terms of number of repositories.
 
