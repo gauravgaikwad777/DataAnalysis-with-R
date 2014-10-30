@@ -1,0 +1,30 @@
+# Q4
+#### Gaurav Gaikwad
+========================================================
+## Number of breach per Year 
+
+```{r}
+library(devtools)
+library(ggplot2)
+library(RCurl)
+
+dataBreachURL <- getURL("https://raw.githubusercontent.com/jrwolf/IT497/master/databreaches.csv")
+dataBreach <- read.csv(text = dataBreachURL)
+dataBreachFilter.F1 <- subset(dataBreach, YEAR > 2007)
+
+dataBreachFilter.F1$METHOD <- gsub("hacked([^abc].*)(.*)", "Hacked", dataBreachFilter.F1$METHOD,ignore.case=TRUE)
+dataBreachFilter.F1$METHOD <- gsub("lost / stolen media(.*)", "lost / stolen media", dataBreachFilter.F1$METHOD,ignore.case=TRUE)
+
+ggplot(dataBreachFilter.F1, aes(factor(dataBreachFilter.F1$YEAR))) +  geom_bar(stat="bin", position= position_dodge()) + xlab("Year") + ylab("Number of Breaches") + ggtitle("Number of Breach per Year")
+```
+
+The first graph provides details about number of breach per year which shows a very high frequencies in year 2010 and 2012. 
+
+## Methods of Breach per year 
+```{r}
+ggplot(dataBreachFilter.F1, aes(fill=as.factor(METHOD),factor(dataBreachFilter.F1$YEAR))) +  geom_bar(stat="bin", position= position_dodge()) + xlab("YEAR") + ylab("Number of Breach Breach") + ggtitle("Method of Breach per Year") + scale_fill_discrete(name="METHOD")
+
+ggplot(dataBreachFilter.F1, aes(x=YEAR, fill=as.factor(METHOD))) + geom_bar(stat="bin") + xlab("Type of METHOD Breach") + ylab("Number of Breaches") + ggtitle("Method of Breach per Year") + scale_fill_discrete(name="METHOD")
+```
+
+Both Graph represents about Method of breach per year which shows that  Hacking is the maximum used method to breach data. This trend hikes in year 2010 to 2012 with some other methods of data breach concurrently.

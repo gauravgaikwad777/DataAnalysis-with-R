@@ -1,0 +1,33 @@
+\documentclass{article}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\title {Q3}
+\author { Gaurav Gaikwad 
+\\ IT497 Research Methodology
+\\ School of Information Technology 
+\\ Illinois State University
+\\
+\texttt{ggaikwa@ilstu.edu}}
+\date{\today}
+\maketitle
+
+\section{First Graph}
+<<label=fig1,fig=TRUE,echo=T>>=
+fig1<-source("Q31.R")
+fig1
+@
+
+This graph is drawn from local R Script file which is drawn for Miles on X axis verses Steps on Y axis. 
+
+\section{Second Graph}
+<<label=fig2,fig=TRUE,echo=T>>=
+library(devtools)
+fig2<-source_url("https://dl.dropboxusercontent.com/u/48214128/Q32.R") 
+fig2
+@
+
+This graph is drawn from remote secure R Script file which is drawn for Steps on X axis verses Miles on Y axis.
+
+\end{document}

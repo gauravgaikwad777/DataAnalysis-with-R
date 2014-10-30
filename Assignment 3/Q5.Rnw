@@ -1,0 +1,41 @@
+\documentclass{article}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\title {Q5}
+\author { Gaurav Gaikwad 
+\\ IT497 Research Methodology
+\\ School of Information Technology 
+\\ Illinois State University
+\\
+\texttt{ggaikwa@ilstu.edu}}
+\date{\today}
+\maketitle
+
+\section{Is McDonald's cleaner then Wendy's? }
+<<label=fig1,fig=TRUE,echo=FALSE,results=hide>>=
+library(devtools)
+library(ggplot2)
+library(RCurl)
+Q5dataURL <- getURL("https://raw.githubusercontent.com/jrwolf/IT497/master/NYCHealthData.csv")
+Q5Data <- read.csv(text = Q5dataURL)
+
+Q5Data$DBA <- gsub("MCDONALD'S($|[a-zA-Z0-9].)|M(.*)", "MCDONALD", Q5Data$DBA,ignore.case=TRUE)
+Q5Data$DBA <- gsub("Wen($|[a-zA-Z0-9].*)|W(.*)","WENDY", Q5Data$DBA,ignore.case=TRUE)
+
+ggplot(data=Q5Data, aes(x=DBA, fill=CURRENTGRADE)) + geom_bar(stat="bin", position=position_dodge()) + xlab("Firm") + ylab("Number of Grades") + ggtitle("Grade Count of McDonal's and Wendy's") + scale_fill_discrete(name="GRADE")
+@
+
+The graph represents Grade counts of a firm. A grade is displayed for both firms grades on diffrent inspection dates which are displayed in the bar graph. Analyzing the graph shows us the fact that McDonals has been graded more times then Wendy's which will not lead us to grade a firm but the ratio of grade A and other grades shows us the fact that clearly McDonald's is mostly graded A in respect to other grades although while Wendy's being ocassioanly graded its grade ratio is low as compaired to McDonal's.
+
+Thus McDonald's is cleaner then Wendy's. 
+
+
+<<label=fig2,fig=TRUE,echo=FALSE,results=hide>>=
+ggplot(data=Q5Data, aes(x=GRADEDATE, fill = DBA)) + geom_bar(stat="bin")
+@
+
+This graph show about the dates when stores where graded and how many times.
+
+\end{document}
