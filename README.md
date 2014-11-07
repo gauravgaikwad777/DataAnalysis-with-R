@@ -1,8 +1,5 @@
-IT497
+Data Analytics with R programming
 =====
-
-Assignments for Research Methodology
-
 
 Assignment 1
 Please access "Assignmnet 1 ggaikwa.doc"
